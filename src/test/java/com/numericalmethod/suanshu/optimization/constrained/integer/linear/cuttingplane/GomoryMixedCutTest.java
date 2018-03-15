@@ -31,8 +31,10 @@ import com.numericalmethod.suanshu.optimization.constrained.integer.linear.probl
 import com.numericalmethod.suanshu.optimization.problem.MinimizationSolution;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
-import org.junit.*;
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -86,7 +88,7 @@ public class GomoryMixedCutTest {
         GomoryMixedCut instance = new GomoryMixedCut();
         MinimizationSolution<Vector> soln = instance.solve(problem);
         assertEquals(-3, soln.minimum(), 0);
-        assertArrayEquals(new double[]{2, 1}, soln.minimizer().toArray(), 0);
+        assertArrayEquals(new double[]{1, 2}, soln.minimizer().toArray(), 0);
     }
 
     /**

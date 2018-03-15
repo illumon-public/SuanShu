@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.parallel;
 
 import com.numericalmethod.suanshu.parallel.SynchronizedIterator.Element;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +33,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * This class provides a framework for executing an algorithm in parallel. A
  * thread pool is created when executing a list of tasks.
- *
+ * <p>
  * <p>
  * Caution: Avoid using another executor within parallelized calls, this would
  * create numerous threads, leading to much memory consumption and huge overhead
@@ -58,7 +59,8 @@ public class ParallelExecutor {
      * </code></pre>
      */
     public ParallelExecutor() {
-        this(Runtime.getRuntime().availableProcessors());
+        this(Runtime.getRuntime().availableProcessors() / 4);
+//        this(1);
     }
 
     /**
@@ -67,6 +69,9 @@ public class ParallelExecutor {
      * @param concurrency the maximum number of threads can be used when executing a list of tasks
      */
     public ParallelExecutor(int concurrency) {
+        if (concurrency <= 0 || concurrency > Runtime.getRuntime().availableProcessors()) {
+            concurrency = Runtime.getRuntime().availableProcessors();
+        }
         this.concurrency = concurrency;
         this.executor = new ThreadPoolExecutor(
                 concurrency,
@@ -317,7 +322,7 @@ public class ParallelExecutor {
 
                         @Override
                         public Void call() throws Exception {
-                            for (Element<T> element; (element = iterator.next()).exists();) {
+                            for (Element<T> element; (element = iterator.next()).exists(); ) {
                                 body.run(element.get());
                             }
                             return null;
