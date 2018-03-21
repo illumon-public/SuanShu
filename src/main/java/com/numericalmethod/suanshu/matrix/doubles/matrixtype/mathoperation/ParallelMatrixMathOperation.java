@@ -22,7 +22,6 @@
  */
 package com.numericalmethod.suanshu.matrix.doubles.matrixtype.mathoperation;
 
-import static com.numericalmethod.suanshu.datastructure.DimensionCheck.*;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.MatrixAccess;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
@@ -32,12 +31,15 @@ import com.numericalmethod.suanshu.parallel.ParallelExecutor;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
 
+import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfDifferentDimension;
+import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfIncompatible4Multiplication;
+
 /**
  * This is a multi-threaded implementation of the matrix math operations.
  *
  * @author Ken Yiu
  */
-class ParallelMatrixMathOperation implements MatrixMathOperation {
+public class ParallelMatrixMathOperation implements MatrixMathOperation {
 
     private final ParallelExecutor parallel = new ParallelExecutor();
 
