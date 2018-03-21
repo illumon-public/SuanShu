@@ -45,7 +45,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ParallelExecutor {
 
     private static final AtomicLong executorCount = new AtomicLong(0);
-    private final int concurrency;
+    private static int concurrency = 1;
     private final ThreadPoolExecutor executor;
     private final AtomicLong threadCount = new AtomicLong(0);
     private final long executorId = executorCount.incrementAndGet();
@@ -59,8 +59,17 @@ public class ParallelExecutor {
      * </code></pre>
      */
     public ParallelExecutor() {
-        this(Runtime.getRuntime().availableProcessors() / 4);
-//        this(1);
+//        this(Runtime.getRuntime().availableProcessors() / 4);
+        this(concurrency);
+    }
+
+    /**
+     * Sets the concurrency level for the ParallelExecutor.
+     *
+     * @param concurrency concurrency level to set
+     */
+    public static void setConcurrencyLevel(final int concurrency) {
+        ParallelExecutor.concurrency = concurrency;
     }
 
     /**

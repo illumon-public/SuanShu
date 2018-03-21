@@ -11,6 +11,7 @@ repositories {
 jar {
     baseName = 'SuanShuExtension'
     version =  '0.1.0'
+    destinationDir = file("$rootDir/build/jars")
 }
 // end::jar[]
 
