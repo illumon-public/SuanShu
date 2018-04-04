@@ -25,8 +25,6 @@ package com.numericalmethod.suanshu.matrix.doubles.factorization.svd;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.diagonal.DiagonalMatrix;
 
-import java.io.Serializable;
-
 /**
  * SVD decomposition decomposes a matrix <i>A</i> of dimension <i>m x n</i>, where <i>m >= n</i>, such that
  * <i>U' * A * V = D</i>, or <i>U * D * V' = A</i>.
@@ -39,7 +37,7 @@ import java.io.Serializable;
  * @author Haksun Li
  * @see <a href="http://en.wikipedia.org/wiki/Singular_value_decomposition">Wikipedia: Singular value decomposition</a>
  */
-public interface SVDDecomposition extends Serializable {
+public interface SVDDecomposition {
 
     /**
      * Get the normalized, hence positive, singular values.

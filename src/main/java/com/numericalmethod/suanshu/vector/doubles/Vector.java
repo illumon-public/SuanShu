@@ -26,8 +26,6 @@ import com.numericalmethod.suanshu.DeepCopyable;
 import com.numericalmethod.suanshu.mathstructure.HilbertSpace;
 import com.numericalmethod.suanshu.number.Real;
 
-import java.io.Serializable;
-
 /**
  * An Euclidean vector is a geometric object that has both a magnitude/length and a direction.
  * The mathematical structure of a collection of vectors is a {@linkplain HilbertSpace Hilbert space}.
@@ -45,7 +43,7 @@ import java.io.Serializable;
  * <li><a href="http://en.wikipedia.org/wiki/Vector_space">Wikipedia: Vector space</a>
  * </ul>
  */
-public interface Vector extends HilbertSpace<Vector, Real>, DeepCopyable, Serializable {
+public interface Vector extends HilbertSpace<Vector, Real>, DeepCopyable {
 
     /**
      * Get the length of this vector.

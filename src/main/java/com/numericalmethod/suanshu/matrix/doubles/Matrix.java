@@ -28,8 +28,6 @@ import com.numericalmethod.suanshu.mathstructure.Ring;
 import com.numericalmethod.suanshu.matrix.MatrixAccessException;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 
-import java.io.Serializable;
-
 /**
  * This interface defines a {@code Matrix} as a {@link Ring}, a {@link Table}, and a few more methods not already defined in its mathematical definition.
  * The interface is made minimal to avoid listing all possible matrix operations.
@@ -38,7 +36,7 @@ import java.io.Serializable;
  *
  * @author Ken Yiu
  */
-public interface Matrix extends MatrixTable, MatrixRing, DeepCopyable, Serializable {
+public interface Matrix extends MatrixTable, MatrixRing, DeepCopyable {
 
     /**
      * Right multiply this matrix, <i>A</i>, by a vector.

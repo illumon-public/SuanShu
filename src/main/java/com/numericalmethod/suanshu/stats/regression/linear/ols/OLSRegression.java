@@ -27,8 +27,6 @@ import com.numericalmethod.suanshu.matrix.doubles.linearsystem.OLSSolver;
 import com.numericalmethod.suanshu.stats.regression.linear.LMProblem;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 
-import java.io.Serializable;
-
 /**
  * (Weighted) Ordinary Least Squares (OLS) is a method for fitting a linear regression model.
  * This method minimizes the (weighted) sum of squared distances between the observed responses in the dataset,
@@ -47,7 +45,7 @@ import java.io.Serializable;
  * <li><a href="http://en.wikipedia.org/wiki/Linear_least_squares">Wikipedia: Ordinary least squares</a>
  * <ul>
  */
-public class OLSRegression implements Serializable {
+public class OLSRegression {
 
     /**
      * the ordinary linear regression problem to be solved
