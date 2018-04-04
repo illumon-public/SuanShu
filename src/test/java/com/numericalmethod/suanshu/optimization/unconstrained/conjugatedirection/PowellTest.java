@@ -225,7 +225,7 @@ public class PowellTest {
 //        System.out.println(fxmin);
         assertEquals(0.0, fxmin, 1e-8);
 
-        Powell optim2 = new Powell(1e-6, 35);
+        Powell optim2 = new Powell(1e-6, 350);
         soln = optim2.solve(new C2OptimProblemImpl(f, g));
         xmin = soln.search(new DenseVector(new double[]{2, 10, -15, 17}));
 //        System.out.println(xmin);
@@ -239,7 +239,7 @@ public class PowellTest {
 //        System.out.println(xmin);
         fxmin = f.evaluate(xmin);
 //        System.out.println(fxmin);
-        assertEquals(0.0, fxmin, 1e-3);
+        assertEquals(0.0, fxmin, 1e-6);
 
         Powell optim4 = new Powell(1e-6, 35);
         soln = optim4.solve(new C2OptimProblemImpl(f, g));
@@ -247,6 +247,6 @@ public class PowellTest {
 //        System.out.println(xmin);
         fxmin = f.evaluate(xmin);
 //        System.out.println(fxmin);
-        assertEquals(0.0, fxmin, 1e-3);
+        assertEquals(0.0, fxmin, 1e-7);
     }
 }
