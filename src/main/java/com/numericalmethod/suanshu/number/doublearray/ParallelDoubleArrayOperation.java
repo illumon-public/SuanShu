@@ -33,7 +33,8 @@ import com.numericalmethod.suanshu.parallel.ParallelExecutor;
  */
 public class ParallelDoubleArrayOperation implements DoubleArrayOperation {
 
-    private final ParallelExecutor parallel = new ParallelExecutor();
+    private static final ParallelExecutor parallel = new ParallelExecutor();
+    private static final long serialVersionUID = -3001844520682789605L;
 
     @Override
     public double[] add(final double[] arr1, final double[] arr2) {

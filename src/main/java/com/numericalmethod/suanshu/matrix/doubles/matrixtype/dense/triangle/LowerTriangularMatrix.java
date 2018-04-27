@@ -44,9 +44,12 @@ import java.util.Arrays;
 //This implementation saves about half of the storage cost (except for the diagonal) when compared to the {@link DenseMatrix} implementation.
 public class LowerTriangularMatrix implements Matrix, Densifiable {
 
-    //<editor-fold defaultstate="collapsed" desc="customize the view/usage of the data array">    
+    private static final long serialVersionUID = -4533029730981297995L;
+
+    //<editor-fold defaultstate="collapsed" desc="customize the view/usage of the data array">
     private static class MyDenseDataImpl extends TriangularData {
 
+        private static final long serialVersionUID = -6757392675463722859L;
         private final double[] data = asArray();
 
         private MyDenseDataImpl(int dim) {
@@ -113,7 +116,7 @@ public class LowerTriangularMatrix implements Matrix, Densifiable {
 
     private final MyDenseDataImpl storage;
     private final int dim;
-    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     //<editor-fold defaultstate="collapsed" desc="Ctors">
     private LowerTriangularMatrix(MyDenseDataImpl data) {

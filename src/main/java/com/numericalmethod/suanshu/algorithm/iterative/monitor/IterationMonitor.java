@@ -22,6 +22,8 @@
  */
 package com.numericalmethod.suanshu.algorithm.iterative.monitor;
 
+import java.io.Serializable;
+
 /**
  * To debug an iterative algorithm, such as in {@link com.numericalmethod.suanshu.algorithm.iterative.IterativeMethod}, it is
  * useful to keep track of the all states generated in the iterations.
@@ -29,7 +31,7 @@ package com.numericalmethod.suanshu.algorithm.iterative.monitor;
  * @param <S> the type of an iteration state
  * @author Ken Yiu
  */
-public interface IterationMonitor<S> {
+public interface IterationMonitor<S> extends Serializable{
 
     /**
      * Record a new iteration state.

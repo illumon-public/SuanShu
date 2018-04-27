@@ -48,6 +48,8 @@ import java.util.Arrays;
  */
 public class DenseMatrix implements Matrix, Densifiable {
 
+    private static final long serialVersionUID = 913612418229957283L;
+
     private static class ParallelExecutorInstanceHolder { // thread-safe lazy initialization idiom
 
         private static final ParallelExecutor instance = new ParallelExecutor();
@@ -56,6 +58,7 @@ public class DenseMatrix implements Matrix, Densifiable {
     //<editor-fold defaultstate="collapsed" desc="customize the view/usage of the data array">
     private static class MyDenseDataImpl extends DenseData {
 
+        private static final long serialVersionUID = -3258990380240538309L;
         private final double[] data = asArray();
         private final int nCols;
 
@@ -111,7 +114,7 @@ public class DenseMatrix implements Matrix, Densifiable {
     }
     //</editor-fold>
     private MyDenseDataImpl storage;
-    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
     /** for parallel algorithm execution */
     private static final int LENGTH_THRESHOLD = 100 * 100;
 

@@ -22,6 +22,7 @@
  */
 package com.numericalmethod.suanshu.stats.random.concurrent;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,9 @@ import java.util.List;
  * @param <T> the type of the item
  * @author Johannes Lehmann
  */
-public class ConcurrentCachedGenerator<T> {
+public class ConcurrentCachedGenerator<T> implements Serializable{
+
+    private static final long serialVersionUID = -1697590116214511998L;
 
     /**
      * Defines a generic generator of type {@code T}.
@@ -41,7 +44,7 @@ public class ConcurrentCachedGenerator<T> {
      * @author Johannes Lehmann
      * @param <T> the type of the generated items
      */
-    public static interface Generator<T> {
+    public static interface Generator<T> extends Serializable{
 
         /**
          * Returns the next value in the underlying generated sequence.
@@ -57,7 +60,7 @@ public class ConcurrentCachedGenerator<T> {
     private final int cacheSize;
     private volatile AtomicIndexedList<T> cache;
     private final Generator<T> generator;
-    private final Object lock = new Object();
+    private static final Object lock = new Object();
 
     /**
      * Creates a new instance which wraps the given item generator and uses a

@@ -44,10 +44,11 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  */
 public class SymmetricMatrix implements Matrix, Densifiable {
 
+    private static final long serialVersionUID = -8785613448975237188L;
     private final int dim;
     /** storage */
     private LowerTriangularMatrix L;//TODO: made final
-    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     //<editor-fold defaultstate="collapsed" desc="Ctors">
     private SymmetricMatrix(LowerTriangularMatrix L) {

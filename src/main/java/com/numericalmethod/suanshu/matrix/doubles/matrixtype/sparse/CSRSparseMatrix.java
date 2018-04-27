@@ -71,6 +71,7 @@ import java.util.List;
  */
 public class CSRSparseMatrix implements SparseMatrix {
 
+    private static final long serialVersionUID = -2682025344288772113L;
     /** number of non-zeros */
     private int nnz = 0;
     private int[] row_ptr = null;
@@ -79,7 +80,7 @@ public class CSRSparseMatrix implements SparseMatrix {
     private double[] value = null;
     private final int nRows;
     private final int nCols;
-    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private final transient MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     /**
      * Construct a sparse matrix in CSR format.

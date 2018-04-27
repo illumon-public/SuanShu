@@ -50,12 +50,13 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  */
 public class GivensMatrix implements Matrix {
 
+    private static final long serialVersionUID = 682800064155621760L;
     private final int dim;
     private final int i;
     private final int j;
     private final double c;
     private final double s;
-    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     /**
      * Construct a Givens matrix in the form

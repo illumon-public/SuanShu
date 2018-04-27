@@ -59,7 +59,6 @@ public class ParallelExecutor {
      * </code></pre>
      */
     public ParallelExecutor() {
-//        this(Runtime.getRuntime().availableProcessors() / 4);
         this(concurrency);
     }
 

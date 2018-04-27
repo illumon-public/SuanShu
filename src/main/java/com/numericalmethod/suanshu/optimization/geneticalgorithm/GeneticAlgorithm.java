@@ -26,6 +26,8 @@ import com.numericalmethod.suanshu.parallel.LoopBody;
 import com.numericalmethod.suanshu.parallel.ParallelExecutor;
 import com.numericalmethod.suanshu.stats.random.RngUtils;
 import com.numericalmethod.suanshu.stats.random.univariate.RandomLongGenerator;
+import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -83,6 +85,10 @@ public abstract class GeneticAlgorithm {
      * An implementation must guarantee that this is sorted in descending order.
      */
     protected final ArrayList<Chromosome> population = new ArrayList<Chromosome>();//{@code final} ensures that the address does not change.
+
+    public GeneticAlgorithm() {
+        this(false, new UniformRng());
+    }
 
     /**
      * Construct an instance of this implementation of genetic algorithm.
