@@ -25,13 +25,14 @@ package com.numericalmethod.suanshu.matrix.doubles.matrixtype.mathoperation;
 import com.numericalmethod.suanshu.matrix.doubles.AreMatrices;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
+import com.numericalmethod.suanshu.parallel.ParallelExecutor;
 import com.numericalmethod.suanshu.stats.random.multivariate.IID;
 import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
-import static org.junit.Assert.*;
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
+
 /**
- *
  * @author Ken Yiu
  */
 public class ParallelMatrixMathOperationTest extends MatrixMathOperationTest {
@@ -109,7 +110,9 @@ public class ParallelMatrixMathOperationTest extends MatrixMathOperationTest {
         assertTrue(AreMatrices.equal(M1, M2, 1e-5));
         assertTrue(AreMatrices.equal(M1, M3, 1e-5));
 
-        assertTrue("Dense Parallel should be the fastest",
-                timeDenseParallel < timeParallel && timeParallel < timeSimple);
+        if (ParallelExecutor.getConcurrencyLevel() > 1) {
+            assertTrue("Dense Parallel should be the fastest",
+                    timeDenseParallel < timeParallel && timeParallel < timeSimple);
+        }
     }
 }

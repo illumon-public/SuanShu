@@ -59,7 +59,6 @@ public class ParallelExecutor {
      * </code></pre>
      */
     public ParallelExecutor() {
-//        this(Runtime.getRuntime().availableProcessors() / 4);
         this(concurrency);
     }
 
@@ -70,6 +69,15 @@ public class ParallelExecutor {
      */
     public static void setConcurrencyLevel(final int concurrency) {
         ParallelExecutor.concurrency = concurrency;
+    }
+
+    /**
+     * Gets the concurrency level for the ParallelExecutor.
+     *
+     * @return  concurrency level
+     */
+    public static int getConcurrencyLevel() {
+        return concurrency;
     }
 
     /**
