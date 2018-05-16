@@ -49,7 +49,7 @@ public class FastKroneckerProduct implements Matrix {
     private static final long serialVersionUID = 5206671555065073115L;
     private final Matrix A;
     private final Matrix B;
-    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     /**
      * Construct a Kronecker product for read-only.

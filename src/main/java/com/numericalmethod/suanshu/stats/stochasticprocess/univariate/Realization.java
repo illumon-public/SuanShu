@@ -49,7 +49,7 @@ public interface Realization extends com.numericalmethod.suanshu.stats.timeserie
      * A realization is therefore only created on demand.
      * For example, we create a realization when an <tt>Iterator</tt> is constructed.
      */
-    public static abstract class Iterator implements java.util.Iterator<Realization.Entry>, Serializable {
+    public abstract class Iterator implements java.util.Iterator<Realization.Entry>, Serializable {
 
         private static final long serialVersionUID = 944058472166716467L;
         private int index = 0;// count from 1

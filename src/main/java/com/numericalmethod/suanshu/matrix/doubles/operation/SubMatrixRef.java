@@ -51,7 +51,7 @@ public class SubMatrixRef implements Matrix {
     private final int colFrom;
     /** the ending column, counting from 1 */
     private final int colTo;
-    private transient final MatrixMathOperation matrixComputation = new SimpleMatrixMathOperation();
+    private final MatrixMathOperation matrixComputation = new SimpleMatrixMathOperation();
 
     /**
      * Construct a sub-matrix reference.

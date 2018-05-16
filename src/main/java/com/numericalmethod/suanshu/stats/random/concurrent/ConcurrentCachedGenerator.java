@@ -22,6 +22,8 @@
  */
 package com.numericalmethod.suanshu.stats.random.concurrent;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +62,7 @@ public class ConcurrentCachedGenerator<T> implements Serializable{
     private final int cacheSize;
     private volatile AtomicIndexedList<T> cache;
     private final Generator<T> generator;
-    private static final Object lock = new Object();
+    private transient Object lock = new Object();
 
     /**
      * Creates a new instance which wraps the given item generator and uses a
@@ -120,5 +122,10 @@ public class ConcurrentCachedGenerator<T> implements Serializable{
             this.cache = newCache;
             lock.notifyAll();
         }
+    }
+
+    public void readObject(final ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
+        lock = new Object();
     }
 }

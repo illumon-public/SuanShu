@@ -48,7 +48,7 @@ public class SymmetricMatrix implements Matrix, Densifiable {
     private final int dim;
     /** storage */
     private LowerTriangularMatrix L;//TODO: made final
-    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     //<editor-fold defaultstate="collapsed" desc="Ctors">
     private SymmetricMatrix(LowerTriangularMatrix L) {

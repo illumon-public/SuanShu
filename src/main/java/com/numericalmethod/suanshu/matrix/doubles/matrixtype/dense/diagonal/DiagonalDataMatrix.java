@@ -45,7 +45,7 @@ abstract class DiagonalDataMatrix implements Matrix, Densifiable {
     private static final long serialVersionUID = -451998121459317091L;
     /** the storage */
     DiagonalData storage;
-    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     /**
      * Construct a matrix implemented using {@code DiagonalData}.

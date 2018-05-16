@@ -10,7 +10,7 @@ repositories {
 
 // tag::jar[]
 jar {
-    baseName = 'SuanShuExtension'
+    baseName = 'SuanShu'
     version =  globalVersion
     destinationDir = file("$rootDir/build/jars")
 }

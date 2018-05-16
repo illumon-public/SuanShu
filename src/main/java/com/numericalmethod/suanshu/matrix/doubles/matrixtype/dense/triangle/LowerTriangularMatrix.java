@@ -116,7 +116,7 @@ public class LowerTriangularMatrix implements Matrix, Densifiable {
 
     private final MyDenseDataImpl storage;
     private final int dim;
-    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     //<editor-fold defaultstate="collapsed" desc="Ctors">
     private LowerTriangularMatrix(MyDenseDataImpl data) {

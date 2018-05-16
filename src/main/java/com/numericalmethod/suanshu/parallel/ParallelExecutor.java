@@ -77,7 +77,7 @@ public class ParallelExecutor {
      * @param concurrency the maximum number of threads can be used when executing a list of tasks
      */
     public ParallelExecutor(int concurrency) {
-        if (concurrency <= 0 || concurrency > Runtime.getRuntime().availableProcessors()) {
+        if (concurrency <= 0) {
             concurrency = Runtime.getRuntime().availableProcessors();
         }
         this.concurrency = concurrency;

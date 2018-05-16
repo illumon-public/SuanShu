@@ -114,7 +114,7 @@ public class DenseMatrix implements Matrix, Densifiable {
     }
     //</editor-fold>
     private MyDenseDataImpl storage;
-    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
     /** for parallel algorithm execution */
     private static final int LENGTH_THRESHOLD = 100 * 100;
 

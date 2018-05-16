@@ -53,7 +53,7 @@ public class LILSparseMatrix implements SparseMatrix {
     private final SparseVector[] rows;
     private final int nRows;
     private final int nCols;
-    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     /**
      * Construct a sparse matrix in LIL format.

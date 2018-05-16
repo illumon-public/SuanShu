@@ -56,7 +56,7 @@ public class GivensMatrix implements Matrix {
     private final int j;
     private final double c;
     private final double s;
-    private transient final MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     /**
      * Construct a Givens matrix in the form

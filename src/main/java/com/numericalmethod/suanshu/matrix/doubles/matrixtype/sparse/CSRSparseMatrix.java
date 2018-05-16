@@ -80,7 +80,7 @@ public class CSRSparseMatrix implements SparseMatrix {
     private double[] value = null;
     private final int nRows;
     private final int nCols;
-    private final transient MatrixMathOperation math = new SimpleMatrixMathOperation();
+    private final MatrixMathOperation math = new SimpleMatrixMathOperation();
 
     /**
      * Construct a sparse matrix in CSR format.
