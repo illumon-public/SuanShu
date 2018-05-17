@@ -11,11 +11,11 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by namanshah on 4/20/18.
+ * Testcases for {@link VectorMathOperation}
  */
 public class VectorMathOperationTest {
     @Test
-    public void add() throws Exception {
+    public void test_add() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Vector v2 = new DenseVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
@@ -28,7 +28,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void minus() throws Exception {
+    public void test_minus() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Vector v2 = new DenseVector(1, 3, 5, 7, 9, 11, 13, 15, 17, 19);
@@ -41,7 +41,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void multiply() throws Exception {
+    public void test_multiply() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Vector v2 = new DenseVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
@@ -54,7 +54,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void divide() throws Exception {
+    public void test_divide() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Vector v2 = new DenseVector(5, 2, 3, 4, 5, 6, 7, 8, 9, 10);
@@ -67,7 +67,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void innerProduct() throws Exception {
+    public void test_innerProduct() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Vector v2 = new DenseVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
@@ -80,7 +80,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void pow() throws Exception {
+    public void test_pow() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(0, 1, 2, 3, Double.NaN, 5, 6, 7, 8, 9);
 
@@ -92,7 +92,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void scaledDouble() throws Exception {
+    public void test_scaledDouble() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Vector v3 = new DenseVector(0, 5, 10, 15, 20, 25, 30, 35, 40, 45);
@@ -106,7 +106,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void addScalar() throws Exception {
+    public void test_addScalar() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Vector v3 = new DenseVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
@@ -120,7 +120,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void minusScalar() throws Exception {
+    public void test_minusScalar() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Vector v3 = new DenseVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -134,7 +134,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void scaledReal() throws Exception {
+    public void test_scaledReal() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Vector v3 = new DenseVector(Double.NaN, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double
@@ -146,7 +146,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void opposite() throws Exception {
+    public void test_opposite() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         Vector v3 = new DenseVector(0, -1, -2, -3, -4, -5, -6, -7, -8, -9);
@@ -161,7 +161,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void angle() throws Exception {
+    public void test_angle() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Vector v2 = new DenseVector(2, 4, 6, 2, 5, 7, 1, 9, 3, 10);
@@ -176,7 +176,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void norm() throws Exception {
+    public void test_norm() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         assertEquals(Math.sqrt(385), vectorMathOperation.norm(v1), 0);
@@ -190,7 +190,7 @@ public class VectorMathOperationTest {
     }
 
     @Test
-    public void normScalar() throws Exception {
+    public void test_normScalar() throws Exception {
         final VectorMathOperation vectorMathOperation = new VectorMathOperation();
         Vector v1 = new DenseVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         final int p = 3;
