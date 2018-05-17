@@ -228,49 +228,49 @@ public class ZangwillTest {
 //        System.out.println(fxmin);
         assertEquals(0.0, fxmin, 1e-6);//fewer precision than that of Powell's algorithm
 
-        Zangwill optim2 = new Zangwill(1e-5, 1e-5, 70);
+        Zangwill optim2 = new Zangwill(1e-5, 1, 200);
         soln = optim2.solve(new C2OptimProblemImpl(f, g));
         //TODO: very sensitive starting value; changing a little will not land even close to the minimum
         xmin = soln.search(new DenseVector(new double[]{2, 10, -15, 17}));//need more iterations than Powell does; changing the params does not seem to improve the results
 //        System.out.println(xmin);
         fxmin = f.evaluate(xmin);
 //        System.out.println(fxmin);
-//        assertEquals(0.0, fxmin, 1e-8);//TODO: not even close to 0!!!
+        assertEquals(0.0, fxmin, 1e-4);//TODO: not even close to 0!!!
 
         /*
          * Powell's algorithm does not have this kind of sensitivity issue.
          */
-        Zangwill optim3 = new Zangwill(1e-15, 1e-15, 150);
+        Zangwill optim3 = new Zangwill(1e-15, 1, 300);
         soln = optim3.solve(new C2OptimProblemImpl(f, g));
         xmin = soln.search(new DenseVector(new double[]{2.0001, 10, -15, 17}));//need more iterations than Powell does
 //        System.out.println(xmin);
         fxmin = f.evaluate(xmin);
 //        System.out.println(fxmin);
-//        assertEquals(0.0, fxmin, 1e-8);//TODO: not even close to 0!!! The answer, however, does agree with what Matlab gives.
+        assertEquals(0.0, fxmin, 1e-4);//TODO: not even close to 0!!! The answer, however, does agree with what Matlab gives.
 
-        Zangwill optim4 = new Zangwill(1e-15, 1e-15, 150);
+        Zangwill optim4 = new Zangwill(1e-15, 1, 300);
         soln = optim4.solve(new C2OptimProblemImpl(f, g));
         xmin = soln.search(new DenseVector(new double[]{1.9999, 10, -15, 17}));//need more iterations than Powell does; changing the params does not seem to improve the results
 //        System.out.println(xmin);
         fxmin = f.evaluate(xmin);
 //        System.out.println(fxmin);
-//        assertEquals(0.0, fxmin, 1e-8);//TODO: not even close to 0!!! The answer, however, does agree with what Matlab gives.
+        assertEquals(0.0, fxmin, 1e-4);//TODO: not even close to 0!!! The answer, however, does agree with what Matlab gives.
 
-        Zangwill optim5 = new Zangwill(1e-10, 1e-15, 150);
+        Zangwill optim5 = new Zangwill(1e-10, 1, 300);
         soln = optim5.solve(new C2OptimProblemImpl(f, g));
         xmin = soln.search(new DenseVector(new double[]{1.99999999, 10, -15, 17}));
 //        System.out.println(xmin);
         fxmin = f.evaluate(xmin);
 //        System.out.println(fxmin);
-//        assertEquals(0.0, fxmin, 1e-8);//TODO: not even close to 0!!! The answer, however, does agree with what Matlab gives.
+        assertEquals(0.0, fxmin, 1e-4);//TODO: not even close to 0!!! The answer, however, does agree with what Matlab gives.
 
-        Zangwill optim6 = new Zangwill(1e-15, 1e-15, 150);
+        Zangwill optim6 = new Zangwill(1e-15, 1, 1150);
         soln = optim6.solve(new C2OptimProblemImpl(f, g));
-        xmin = soln.search(new DenseVector(new double[]{1.9999999999, 10, -15, 17}));//this initial value seems to give the best final result; hey, how do you "guess" the initial value?
+        xmin = soln.search(new DenseVector(new double[]{2, 10, -15, 17}));//this initial value seems to give the best final result; hey, how do you "guess" the initial value?
 //        System.out.println(xmin);
         fxmin = f.evaluate(xmin);
 //        System.out.println(fxmin);
-//        assertEquals(0.0, fxmin, 1e-2);
+        assertEquals(0.0, fxmin, 1e-2);
     }
 
     /**
@@ -345,7 +345,7 @@ public class ZangwillTest {
 //        System.out.println(fxmin);
         assertEquals(0.0, fxmin, 1e-6);//fewer precision than that of Powell's algorithm
 
-        Zangwill optim2 = new Zangwill(1e-5, 1e15, 70);
+        Zangwill optim2 = new Zangwill(1e-5, 1, 70);
         soln = optim2.solve(new C2OptimProblemImpl(f, g));
         //TODO: very sensitive starting value; changing a little will not land even close to the minimum
         xmin = soln.search(new DenseVector(new double[]{2, 10, -15, 17}));//need more iterations than Powell does; changing the params does not seem to improve the results
@@ -357,7 +357,7 @@ public class ZangwillTest {
         /*
          * Powell's algorithm does not have this kind of sensitivity issue.
          */
-        Zangwill optim3 = new Zangwill(1e-15, 1e15, 150);
+        Zangwill optim3 = new Zangwill(1e-15, 1, 150);
         soln = optim3.solve(new C2OptimProblemImpl(f, g));
         xmin = soln.search(new DenseVector(new double[]{2.0001, 10, -15, 17}));//need more iterations than Powell does
 //        System.out.println(xmin);
@@ -365,15 +365,15 @@ public class ZangwillTest {
 //        System.out.println(fxmin);
         assertEquals(0.0, fxmin, 1e-3);//better than what Zangwill would normally give
 
-        Zangwill optim4 = new Zangwill(1e-15, 1e15, 150);
+        Zangwill optim4 = new Zangwill(1e-15, 1, 150);
         soln = optim4.solve(new C2OptimProblemImpl(f, g));
         xmin = soln.search(new DenseVector(new double[]{1.9999, 10, -15, 17}));//need more iterations than Powell does; changing the params does not seem to improve the results
 //        System.out.println(xmin);
         fxmin = f.evaluate(xmin);
 //        System.out.println(fxmin);
-        assertEquals(0.0, fxmin, 1e-3);//better than what Zangwill would normally give
+        assertEquals(0.0, fxmin, 1e-4);//better than what Zangwill would normally give
 
-        Zangwill optim5 = new Zangwill(1e-10, 1e15, 150);
+        Zangwill optim5 = new Zangwill(1e-10, 1, 150);
         soln = optim5.solve(new C2OptimProblemImpl(f, g));
         xmin = soln.search(new DenseVector(new double[]{1.99999999, 10, -15, 17}));
 //        System.out.println(xmin);
@@ -381,12 +381,12 @@ public class ZangwillTest {
 //        System.out.println(fxmin);
         assertEquals(0.0, fxmin, 1e-3);//better than what Zangwill would normally give
 
-        Zangwill optim6 = new Zangwill(1e-15, 1e-15, 150);
+        Zangwill optim6 = new Zangwill(1e-15, 1, 1150);
         soln = optim6.solve(new C2OptimProblemImpl(f, g));
         xmin = soln.search(new DenseVector(new double[]{1.9999999999, 10, -15, 17}));//this initial value seems to give the best final result; hey, how do you "guess" the initial value?
 //        System.out.println(xmin);
         fxmin = f.evaluate(xmin);
 //        System.out.println(fxmin);
-//        assertEquals(0.0, fxmin, 1e-2);
+        assertEquals(0.0, fxmin, 1e-4);
     }
 }
