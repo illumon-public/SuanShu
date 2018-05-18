@@ -31,10 +31,6 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.mathoperation.Simpl
 import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixUtils;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Arrays;
 
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.isSquare;
