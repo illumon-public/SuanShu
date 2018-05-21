@@ -97,7 +97,7 @@ public abstract class GeneticAlgorithm {
      * @param uniform  a uniform random number generator
      */
     public GeneticAlgorithm(boolean parallel, RandomLongGenerator uniform) {
-        this.parallel = parallel ? new ParallelExecutor() : null;
+        this.parallel = parallel ? ParallelExecutor.getInstance() : null;
         this.uniform = parallel ? RngUtils.synchronizedRLG(uniform) : uniform;
     }
 

@@ -38,7 +38,7 @@ import java.io.Serializable;
  *
  * @author Haksun Li
  */
-public class BootstrapEstimator implements Serializable{
+public class BootstrapEstimator implements Serializable {
 
     private static final long serialVersionUID = 1036807822402450319L;
     private final Resampling bootstrap;
@@ -103,8 +103,8 @@ public class BootstrapEstimator implements Serializable{
 
     private void sim() throws MultipleExecutionException {
         final Object lock = new Object();
-        new ParallelExecutor().conditionalForLoop(isParallel, 0, B,
-                                                  new LoopBody() {
+        ParallelExecutor.getInstance().conditionalForLoop(isParallel, 0, B,
+                new LoopBody() {
 
             public void run(int i) throws Exception {
                 double[] resample;

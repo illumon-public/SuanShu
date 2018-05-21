@@ -70,7 +70,7 @@ public class BruteForceIPMinimizer implements IPMinimizer<BruteForceIPProblem, B
      *
      * @param <U> a subclass of {@code ConstrainedMinimizer}
      */
-    public static interface ConstrainedMinimizerFactory<U extends ConstrainedMinimizer<ConstrainedOptimProblem, IterativeMinimizer<Vector>>> extends Serializable{
+    public static interface ConstrainedMinimizerFactory<U extends ConstrainedMinimizer<ConstrainedOptimProblem, IterativeMinimizer<Vector>>> extends Serializable {
 
         /**
          * Construct a new instance of {@code ConstrainedMinimizer} to solve a real valued minimization problem.
@@ -128,7 +128,7 @@ public class BruteForceIPMinimizer implements IPMinimizer<BruteForceIPProblem, B
 
             final ConcurrentLinkedQueue<Result> results = new ConcurrentLinkedQueue<Result>();
             try {
-                new ParallelExecutor().forEach(
+                ParallelExecutor.getInstance().forEach(
                         domains,
                         new IterationBody<List<Integer>>() {
 

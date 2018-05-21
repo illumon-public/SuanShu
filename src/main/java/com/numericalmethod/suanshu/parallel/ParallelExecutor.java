@@ -50,6 +50,8 @@ public class ParallelExecutor {
     private final AtomicLong threadCount = new AtomicLong(0);
     private final long executorId = executorCount.incrementAndGet();
     private final String namePrefix = String.format("parallel-executor-%d-thread-", executorId);
+    private static ParallelExecutor parallelExecutor;
+    private static boolean concurrencyChanged = false;
 
     /**
      * Creates an instance using default concurrency number, which is the
@@ -58,8 +60,17 @@ public class ParallelExecutor {
      * Runtime.getRuntime().availableProcessors()
      * </code></pre>
      */
-    public ParallelExecutor() {
+    private ParallelExecutor() {
         this(concurrency);
+    }
+
+
+    public static synchronized ParallelExecutor getInstance() {
+        if (parallelExecutor == null || concurrencyChanged) {
+            parallelExecutor = new ParallelExecutor(concurrency);
+            concurrencyChanged = false;
+        }
+        return parallelExecutor;
     }
 
     /**
@@ -67,8 +78,11 @@ public class ParallelExecutor {
      *
      * @param concurrency concurrency level to set
      */
-    public static void setConcurrencyLevel(final int concurrency) {
-        ParallelExecutor.concurrency = concurrency;
+    public static synchronized void setConcurrencyLevel(final int concurrency) {
+        if (concurrency != ParallelExecutor.concurrency) {
+            ParallelExecutor.concurrency = concurrency;
+            concurrencyChanged = true;
+        }
     }
 
     /**
@@ -76,7 +90,7 @@ public class ParallelExecutor {
      *
      * @param concurrency the maximum number of threads can be used when executing a list of tasks
      */
-    public ParallelExecutor(int concurrency) {
+    private ParallelExecutor(int concurrency) {
         if (concurrency <= 0) {
             concurrency = Runtime.getRuntime().availableProcessors();
         }

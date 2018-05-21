@@ -41,7 +41,7 @@ import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfIn
  */
 class ParallelMatrixMathOperation implements MatrixMathOperation {
 
-    private final ParallelExecutor parallel = new ParallelExecutor();
+    private final ParallelExecutor parallel = ParallelExecutor.getInstance();
 
     @Override
     public Matrix add(final MatrixAccess A1, final MatrixAccess A2) {

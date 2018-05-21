@@ -22,7 +22,6 @@
  */
 package com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense;
 
-import static com.numericalmethod.suanshu.datastructure.DimensionCheck.*;
 import com.numericalmethod.suanshu.matrix.MatrixAccessException;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.mathoperation.MatrixMathOperation;
@@ -34,7 +33,11 @@ import com.numericalmethod.suanshu.parallel.MultipleExecutionException;
 import com.numericalmethod.suanshu.parallel.ParallelExecutor;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.Arrays;
+
+import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfDifferentDimension;
+import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfIncompatible4Multiplication;
 
 /**
  * This class implements the standard, dense, {@code double} based matrix representation.
@@ -52,7 +55,7 @@ public class DenseMatrix implements Matrix, Densifiable {
 
     private static class ParallelExecutorInstanceHolder { // thread-safe lazy initialization idiom
 
-        private static final ParallelExecutor instance = new ParallelExecutor();
+        private static final ParallelExecutor instance = ParallelExecutor.getInstance();
     }
 
     //<editor-fold defaultstate="collapsed" desc="customize the view/usage of the data array">
@@ -112,13 +115,17 @@ public class DenseMatrix implements Matrix, Densifiable {
             return nCols;
         }
     }
+
     //</editor-fold>
     private MyDenseDataImpl storage;
     private final MatrixMathOperation math = new SimpleMatrixMathOperation();
-    /** for parallel algorithm execution */
+    /**
+     * for parallel algorithm execution
+     */
     private static final int LENGTH_THRESHOLD = 100 * 100;
 
     //<editor-fold defaultstate="collapsed" desc="Ctors">
+
     /**
      * Construct a 0 matrix of dimension <i>nRows * nCols</i>.
      *

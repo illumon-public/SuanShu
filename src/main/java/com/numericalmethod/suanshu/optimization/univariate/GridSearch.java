@@ -75,7 +75,7 @@ public class GridSearch implements UnivariateMinimizer {
             final double[] fx = new double[x.length];
 
             try {// try multi-thread
-                new ParallelExecutor().forLoop(
+                ParallelExecutor.getInstance().forLoop(
                         0,
                         x.length,
                         new LoopBody() {

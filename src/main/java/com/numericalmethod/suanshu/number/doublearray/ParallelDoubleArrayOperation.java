@@ -26,6 +26,9 @@ import com.numericalmethod.suanshu.parallel.LoopBody;
 import com.numericalmethod.suanshu.parallel.MultipleExecutionException;
 import com.numericalmethod.suanshu.parallel.ParallelExecutor;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 /**
  * This is a multi-threaded implementation of the array math operations.
  *
@@ -33,7 +36,7 @@ import com.numericalmethod.suanshu.parallel.ParallelExecutor;
  */
 public class ParallelDoubleArrayOperation implements DoubleArrayOperation {
 
-    private static final ParallelExecutor parallel = new ParallelExecutor();
+    private transient ParallelExecutor parallel = ParallelExecutor.getInstance();
     private static final long serialVersionUID = -3001844520682789605L;
 
     @Override
@@ -88,5 +91,10 @@ public class ParallelDoubleArrayOperation implements DoubleArrayOperation {
         }
 
         return result;
+    }
+
+    public void readObject(final ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
+        parallel = ParallelExecutor.getInstance();
     }
 }
