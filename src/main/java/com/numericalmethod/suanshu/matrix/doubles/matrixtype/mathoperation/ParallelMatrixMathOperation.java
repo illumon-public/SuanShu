@@ -39,7 +39,7 @@ import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfIn
  *
  * @author Ken Yiu
  */
-public class ParallelMatrixMathOperation implements MatrixMathOperation {
+class ParallelMatrixMathOperation implements MatrixMathOperation {
 
     private final ParallelExecutor parallel = new ParallelExecutor();
 

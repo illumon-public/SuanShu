@@ -46,7 +46,7 @@ public class DenseVector implements Vector {
     private double[] data;
     /** the length of this vector, counting from 1 */
     private final int length;
-    private transient VectorMathOperation math = new VectorMathOperation();
+    private VectorMathOperation math = new VectorMathOperation();
 
     //<editor-fold defaultstate="collapsed" desc="Ctors">
     /**
