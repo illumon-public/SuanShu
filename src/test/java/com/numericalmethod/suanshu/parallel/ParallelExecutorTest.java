@@ -78,7 +78,7 @@ public class ParallelExecutorTest {
     @Test
     public void test_executeAllVarArg_0010() throws MultipleExecutionException {
         @SuppressWarnings("unchecked")
-                List<Integer> results = ParallelExecutor.getInstance().executeAll(
+        List<Integer> results = ParallelExecutor.getInstance().executeAll(
                 new Callable<Integer>() {
 
                     @Override
@@ -136,6 +136,7 @@ public class ParallelExecutorTest {
                 });
 
         assertEquals(1, result.intValue());
+        ParallelExecutor.shutdown();
     }
 
     @Test

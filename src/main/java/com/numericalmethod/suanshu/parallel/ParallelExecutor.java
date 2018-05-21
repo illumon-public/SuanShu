@@ -45,31 +45,15 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ParallelExecutor {
 
     private static final AtomicLong executorCount = new AtomicLong(0);
-    private static int concurrency = 1;
+    private final int concurrency;
     private final ThreadPoolExecutor executor;
     private final AtomicLong threadCount = new AtomicLong(0);
     private final long executorId = executorCount.incrementAndGet();
     private final String namePrefix = String.format("parallel-executor-%d-thread-", executorId);
-    private static ParallelExecutor parallelExecutor;
-    private static boolean concurrencyChanged = false;
-
-    /**
-     * Creates an instance using default concurrency number, which is the
-     * number of available processors returned by
-     * <pre><code>
-     * Runtime.getRuntime().availableProcessors()
-     * </code></pre>
-     */
-    private ParallelExecutor() {
-        this(concurrency);
-    }
+    private static ParallelExecutor parallelExecutor = new ParallelExecutor(1);
 
 
     public static synchronized ParallelExecutor getInstance() {
-        if (parallelExecutor == null || concurrencyChanged) {
-            parallelExecutor = new ParallelExecutor(concurrency);
-            concurrencyChanged = false;
-        }
         return parallelExecutor;
     }
 
@@ -79,9 +63,9 @@ public class ParallelExecutor {
      * @param concurrency concurrency level to set
      */
     public static synchronized void setConcurrencyLevel(final int concurrency) {
-        if (concurrency != ParallelExecutor.concurrency) {
-            ParallelExecutor.concurrency = concurrency;
-            concurrencyChanged = true;
+        final int realConcurrency = concurrency <= 0 ? Runtime.getRuntime().availableProcessors() : concurrency;
+        if (realConcurrency != parallelExecutor.concurrency) {
+            parallelExecutor = new ParallelExecutor(realConcurrency);
         }
     }
 
@@ -91,9 +75,6 @@ public class ParallelExecutor {
      * @param concurrency the maximum number of threads can be used when executing a list of tasks
      */
     private ParallelExecutor(int concurrency) {
-        if (concurrency <= 0) {
-            concurrency = Runtime.getRuntime().availableProcessors();
-        }
         this.concurrency = concurrency;
         this.executor = new ThreadPoolExecutor(
                 concurrency,
@@ -124,6 +105,14 @@ public class ParallelExecutor {
          * Ref.: see javadoc for ThreadPoolExecutor
          */
         this.executor.allowCoreThreadTimeOut(true);
+    }
+
+
+    /**
+     * Resets the concurrency level.
+     */
+    public static synchronized void shutdown() {
+        setConcurrencyLevel(1);
     }
 
     /**

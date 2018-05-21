@@ -53,10 +53,6 @@ public class DenseMatrix implements Matrix, Densifiable {
 
     private static final long serialVersionUID = 913612418229957283L;
 
-    private static class ParallelExecutorInstanceHolder { // thread-safe lazy initialization idiom
-
-        private static final ParallelExecutor instance = ParallelExecutor.getInstance();
-    }
 
     //<editor-fold defaultstate="collapsed" desc="customize the view/usage of the data array">
     private static class MyDenseDataImpl extends DenseData {
@@ -413,7 +409,7 @@ public class DenseMatrix implements Matrix, Densifiable {
 //            }
 //        }
         try {
-            ParallelExecutorInstanceHolder.instance.conditionalForLoop(
+            ParallelExecutor.getInstance().conditionalForLoop(
                     thisData.length >= LENGTH_THRESHOLD,
                     0, thisData.length, nCols,
                     new LoopBody() { //loop over rows of 'this'
@@ -476,7 +472,7 @@ public class DenseMatrix implements Matrix, Densifiable {
 //        }
 
         try {
-            ParallelExecutorInstanceHolder.instance.conditionalForLoop(
+            ParallelExecutor.getInstance().conditionalForLoop(
                     thisData.length >= LENGTH_THRESHOLD,
                     0, nRows, new LoopBody() {
 
@@ -517,7 +513,7 @@ public class DenseMatrix implements Matrix, Densifiable {
 //            result.set(i / nCols + 1, sum);
 //        }
         try {
-            ParallelExecutorInstanceHolder.instance.conditionalForLoop(
+            ParallelExecutor.getInstance().conditionalForLoop(
                     resultData.length >= LENGTH_THRESHOLD,
                     0, resultData.length, 1,
                     new LoopBody() {

@@ -36,14 +36,13 @@ import java.io.ObjectInputStream;
  */
 public class ParallelDoubleArrayOperation implements DoubleArrayOperation {
 
-    private transient ParallelExecutor parallel = ParallelExecutor.getInstance();
     private static final long serialVersionUID = -3001844520682789605L;
 
     @Override
     public double[] add(final double[] arr1, final double[] arr2) {
         final double[] result = new double[arr1.length];
         try {
-            parallel.forLoop(0, arr1.length, new LoopBody() {
+            ParallelExecutor.getInstance().forLoop(0, arr1.length, new LoopBody() {
 
                 @Override
                 public void run(int i) throws Exception {
@@ -61,7 +60,7 @@ public class ParallelDoubleArrayOperation implements DoubleArrayOperation {
     public double[] minus(final double[] arr1, final double[] arr2) {
         final double[] result = new double[arr1.length];
         try {
-            parallel.forLoop(0, arr1.length, new LoopBody() {
+            ParallelExecutor.getInstance().forLoop(0, arr1.length, new LoopBody() {
 
                 @Override
                 public void run(int i) throws Exception {
@@ -79,7 +78,7 @@ public class ParallelDoubleArrayOperation implements DoubleArrayOperation {
     public double[] scaled(final double[] arr, final double c) {
         final double[] result = new double[arr.length];
         try {
-            parallel.forLoop(0, arr.length, new LoopBody() {
+            ParallelExecutor.getInstance().forLoop(0, arr.length, new LoopBody() {
 
                 @Override
                 public void run(int i) throws Exception {
@@ -91,10 +90,5 @@ public class ParallelDoubleArrayOperation implements DoubleArrayOperation {
         }
 
         return result;
-    }
-
-    public void readObject(final ObjectInputStream ois) throws IOException, ClassNotFoundException {
-        ois.defaultReadObject();
-        parallel = ParallelExecutor.getInstance();
     }
 }

@@ -50,8 +50,7 @@ import java.util.List;
  * All methods are {@code protected} so any can be overridden to allow customization.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Differential_evolution">Wikipedia: Differential evolution</a>
  * <li>"Kenneth Price, Rainer M. Storn, Jouni A. Lampinen, "Fig. 1.15, Meta-algorithm for evolution strategies (ESs)," Differential Evolution: A Practical Approach to Global Optimization, 2005."
  * </ul>
@@ -71,10 +70,11 @@ public abstract class GeneticAlgorithm {
      * @return {@code true} if the search has converged
      */
     protected abstract boolean isConverged();
+
     /**
      * This indicate if the algorithm is to run in parallel (multi-core).
      */
-    protected final ParallelExecutor parallel;
+    protected final boolean parallel;
     /**
      * This is a uniform random number generator.
      */
@@ -97,7 +97,7 @@ public abstract class GeneticAlgorithm {
      * @param uniform  a uniform random number generator
      */
     public GeneticAlgorithm(boolean parallel, RandomLongGenerator uniform) {
-        this.parallel = parallel ? ParallelExecutor.getInstance() : null;
+        this.parallel = parallel;
         this.uniform = parallel ? RngUtils.synchronizedRLG(uniform) : uniform;
     }
 
@@ -107,7 +107,7 @@ public abstract class GeneticAlgorithm {
     public void run() {
         population.addAll(initialization());
 
-        for (; !isConverged();) {
+        for (; !isConverged(); ) {
             step();
         }
     }
@@ -121,19 +121,19 @@ public abstract class GeneticAlgorithm {
         int nChildren = nChildren();
         final ArrayList<Chromosome> children = GeneticAlgorithm.getNewPool(nChildren);
 
-        if (parallel != null) {
+        if (parallel) {
             //multiple threads
             try {
-                parallel.forLoop(0, children.size(),
-                                 new LoopBody() {
+                ParallelExecutor.getInstance().forLoop(0, children.size(),
+                        new LoopBody() {
 
-                    @Override
-                    public void run(int i) throws Exception {
-                        Chromosome child = getChild(i);
-                        child.fitness();//force objective function evaluation in the parallel loop
-                        children.set(i, child);
-                    }
-                });
+                            @Override
+                            public void run(int i) throws Exception {
+                                Chromosome child = getChild(i);
+                                child.fitness();//force objective function evaluation in the parallel loop
+                                children.set(i, child);
+                            }
+                        });
             } catch (Exception ex) {
                 throw new RuntimeException("failed to generate children", ex);
             }

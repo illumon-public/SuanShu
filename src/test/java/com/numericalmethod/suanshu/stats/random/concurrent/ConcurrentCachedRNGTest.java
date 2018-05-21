@@ -75,5 +75,6 @@ public class ConcurrentCachedRNGTest {
 
         System.out.printf("Benchmark results: Synchronized took %dms, ConcurrentCachedRNG took %dms%n", synchTotal, cachedTotal);
         assertTrue("ConcurrentCachedRNG is faster", cachedTotal < synchTotal);
+        ParallelExecutor.shutdown();
     }
 }
