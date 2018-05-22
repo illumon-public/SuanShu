@@ -84,7 +84,7 @@ public class Zangwill extends SteepestDescent {
                 double ratio = akm * deltak / lambda;
 
                 if (ratio > epsilon2) {
-                    d0[m] = dk;
+                    d0[m] = dk.scaled(1/lambda);
                     deltak = ratio;
                 }//else, do nothing, keeping the same conjugate directions
             }
