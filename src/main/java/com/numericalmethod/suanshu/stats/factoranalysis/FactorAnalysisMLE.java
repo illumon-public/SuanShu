@@ -188,7 +188,7 @@ class FactorAnalysisMLE implements Serializable{
 //        xmin = optim2.search(xmin);   
         }
 
-        if (min(xmin.toArray()) < 0.005 - Constant.EPSILON) {
+        if (min(xmin.toArray()) < 0.004999) {
             throw new RuntimeException(String.format("invalid psi: %s", xmin.toString()));
         }
 
