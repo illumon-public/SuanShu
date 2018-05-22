@@ -44,11 +44,14 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  */
 public class Powell extends SteepestDescent {
 
+    private static final long serialVersionUID = -7906700544869442866L;
+
     /**
      * an implementation of Powell's algorithm
      */
     protected class PowellImpl extends SteepestDescentImpl {
 
+        private static final long serialVersionUID = 4855943085615223937L;
         private Vector dk = null;
         private Vector[] d0;
         private final int n;
