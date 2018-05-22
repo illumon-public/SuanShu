@@ -44,6 +44,8 @@ import java.util.List;
  */
 public class QuadraticRoot implements PolyRootSolver {
 
+    private static final long serialVersionUID = 4386183515701071704L;
+
     /**
      * Solve \(ax^2 + bx + c = 0\).
      *

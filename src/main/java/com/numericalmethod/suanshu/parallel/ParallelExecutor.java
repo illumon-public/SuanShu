@@ -45,21 +45,16 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ParallelExecutor {
 
     private static final AtomicLong executorCount = new AtomicLong(0);
-    private static int concurrency = 1;
+    private final int concurrency;
     private final ThreadPoolExecutor executor;
     private final AtomicLong threadCount = new AtomicLong(0);
     private final long executorId = executorCount.incrementAndGet();
     private final String namePrefix = String.format("parallel-executor-%d-thread-", executorId);
+    private static ParallelExecutor parallelExecutor = new ParallelExecutor(1);
 
-    /**
-     * Creates an instance using default concurrency number, which is the
-     * number of available processors returned by
-     * <pre><code>
-     * Runtime.getRuntime().availableProcessors()
-     * </code></pre>
-     */
-    public ParallelExecutor() {
-        this(concurrency);
+
+    public static synchronized ParallelExecutor getInstance() {
+        return parallelExecutor;
     }
 
     /**
@@ -67,17 +62,11 @@ public class ParallelExecutor {
      *
      * @param concurrency concurrency level to set
      */
-    public static void setConcurrencyLevel(final int concurrency) {
-        ParallelExecutor.concurrency = concurrency;
-    }
-
-    /**
-     * Gets the concurrency level for the ParallelExecutor.
-     *
-     * @return  concurrency level
-     */
-    public static int getConcurrencyLevel() {
-        return concurrency;
+    public static synchronized void setConcurrencyLevel(final int concurrency) {
+        final int realConcurrency = concurrency <= 0 ? Runtime.getRuntime().availableProcessors() : concurrency;
+        if (realConcurrency != parallelExecutor.concurrency) {
+            parallelExecutor = new ParallelExecutor(realConcurrency);
+        }
     }
 
     /**
@@ -85,10 +74,7 @@ public class ParallelExecutor {
      *
      * @param concurrency the maximum number of threads can be used when executing a list of tasks
      */
-    public ParallelExecutor(int concurrency) {
-        if (concurrency <= 0 || concurrency > Runtime.getRuntime().availableProcessors()) {
-            concurrency = Runtime.getRuntime().availableProcessors();
-        }
+    private ParallelExecutor(int concurrency) {
         this.concurrency = concurrency;
         this.executor = new ThreadPoolExecutor(
                 concurrency,
@@ -120,6 +106,7 @@ public class ParallelExecutor {
          */
         this.executor.allowCoreThreadTimeOut(true);
     }
+
 
     /**
      * Executes a list of {@link Callable} tasks, and returns a list of results
