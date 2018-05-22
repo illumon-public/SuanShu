@@ -69,7 +69,7 @@ public class ParallelMatrixMathOperationTest extends MatrixMathOperationTest {
         assertTrue("results computed by simple and parallel algorithms should be the same",
                 AreMatrices.equal(result1, result3, 1e-5));
 
-        if (ParallelExecutor.getConcurrencyLevel() > 1) {
+        if (ParallelExecutor.getInstance().getConcurrency() > 1) {
             assertTrue("Dense Parallel should be the fastest",
                     timeDenseParallel < timeParallel && timeParallel < timeSimple);
         }
@@ -112,7 +112,7 @@ public class ParallelMatrixMathOperationTest extends MatrixMathOperationTest {
         assertTrue(AreMatrices.equal(M1, M2, 1e-5));
         assertTrue(AreMatrices.equal(M1, M3, 1e-5));
 
-        if (ParallelExecutor.getConcurrencyLevel() > 1) {
+        if (ParallelExecutor.getInstance().getConcurrency() > 1) {
             assertTrue("Dense Parallel should be the fastest",
                     timeDenseParallel < timeParallel && timeParallel < timeSimple);
         }
