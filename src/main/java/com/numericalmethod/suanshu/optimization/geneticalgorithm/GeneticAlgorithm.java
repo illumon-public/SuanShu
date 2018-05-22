@@ -26,8 +26,8 @@ import com.numericalmethod.suanshu.parallel.LoopBody;
 import com.numericalmethod.suanshu.parallel.ParallelExecutor;
 import com.numericalmethod.suanshu.stats.random.RngUtils;
 import com.numericalmethod.suanshu.stats.random.univariate.RandomLongGenerator;
-import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -55,7 +55,9 @@ import java.util.List;
  * <li>"Kenneth Price, Rainer M. Storn, Jouni A. Lampinen, "Fig. 1.15, Meta-algorithm for evolution strategies (ESs)," Differential Evolution: A Practical Approach to Global Optimization, 2005."
  * </ul>
  */
-public abstract class GeneticAlgorithm {
+public abstract class GeneticAlgorithm implements Serializable {
+
+    private static final long serialVersionUID = -2933092757409794476L;
 
     /**
      * Initialize the first population.
@@ -85,10 +87,6 @@ public abstract class GeneticAlgorithm {
      * An implementation must guarantee that this is sorted in descending order.
      */
     protected final ArrayList<Chromosome> population = new ArrayList<Chromosome>();//{@code final} ensures that the address does not change.
-
-    public GeneticAlgorithm() {
-        this(false, new UniformRng());
-    }
 
     /**
      * Construct an instance of this implementation of genetic algorithm.
