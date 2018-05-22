@@ -40,7 +40,7 @@ public class ConcurrentCachedRNGTest {
 
     @After
     public void tearDown() throws Exception {
-        ParallelExecutor.setConcurrencyLevel(1);
+        ParallelExecutor.setConcurrencyLevel(-1);
     }
 
     @Test

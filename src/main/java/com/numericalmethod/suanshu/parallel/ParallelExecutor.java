@@ -50,7 +50,7 @@ public class ParallelExecutor {
     private final AtomicLong threadCount = new AtomicLong(0);
     private final long executorId = executorCount.incrementAndGet();
     private final String namePrefix = String.format("parallel-executor-%d-thread-", executorId);
-    private static ParallelExecutor parallelExecutor = new ParallelExecutor(1);
+    private static ParallelExecutor parallelExecutor = new ParallelExecutor(Runtime.getRuntime().availableProcessors());
 
 
     public static synchronized ParallelExecutor getInstance() {
@@ -60,7 +60,7 @@ public class ParallelExecutor {
     /**
      * Sets the concurrency level for the ParallelExecutor.
      *
-     * @param concurrency concurrency level to set
+     * @param concurrency concurrency level to set.  -1 indicates that there should be one thread per processor.
      */
     public static synchronized void setConcurrencyLevel(final int concurrency) {
         final int realConcurrency = concurrency <= 0 ? Runtime.getRuntime().availableProcessors() : concurrency;
@@ -107,6 +107,14 @@ public class ParallelExecutor {
         this.executor.allowCoreThreadTimeOut(true);
     }
 
+    /**
+     * Gets the number of concurrent threads.
+     *
+     * @return number of concurrent threads.
+     */
+    public int getConcurrency() {
+        return concurrency;
+    }
 
     /**
      * Executes a list of {@link Callable} tasks, and returns a list of results
