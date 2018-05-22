@@ -82,7 +82,7 @@ public class FactorAnalysisTest {
                 corr,
                 1e-6));
 
-        FAEstimator estimators = instance.getEstimators(600);
+        FAEstimator estimators = instance.getEstimators(300);
 
         Vector uniqueness = estimators.psi();
 //        System.out.println(uniqueness);
@@ -173,7 +173,7 @@ public class FactorAnalysisTest {
                 corr,
                 1e-6));
 
-        FAEstimator estimators = instance.getEstimators(600);
+        FAEstimator estimators = instance.getEstimators(300);
 
         Vector uniqueness = estimators.psi();
 //        System.out.println(uniqueness);
