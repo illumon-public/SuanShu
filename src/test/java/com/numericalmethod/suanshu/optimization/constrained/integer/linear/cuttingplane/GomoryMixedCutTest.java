@@ -78,7 +78,7 @@ public class GomoryMixedCutTest {
     @Test
     public void test_0020() throws LPInfeasible, Exception {
         ILPProblemImpl1 problem = new ILPProblemImpl1(
-                new DenseVector(new double[]{-1, -1}), null,
+                new DenseVector(new double[]{-1.1, -1}), null,
                 new LinearLessThanConstraints(new DenseMatrix(new double[][]{
                     {7, 1},
                     {-1, 1}
@@ -87,8 +87,8 @@ public class GomoryMixedCutTest {
 
         GomoryMixedCut instance = new GomoryMixedCut();
         MinimizationSolution<Vector> soln = instance.solve(problem);
-        assertEquals(-3, soln.minimum(), 0);
-        assertArrayEquals(new double[]{1, 2}, soln.minimizer().toArray(), 0);
+        assertEquals(-3.2, soln.minimum(), 1e-8);
+        assertArrayEquals(new double[]{2, 1}, soln.minimizer().toArray(), 0);
     }
 
     /**
