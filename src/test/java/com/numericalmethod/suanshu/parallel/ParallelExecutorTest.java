@@ -28,6 +28,7 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.stats.random.multivariate.IID;
 import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
+import org.junit.After;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -44,6 +45,11 @@ import static org.junit.Assert.*;
  * @author Ken Yiu
  */
 public class ParallelExecutorTest {
+
+    @After
+    public void tearDown() throws Exception {
+        ParallelExecutor.setConcurrencyLevel(1);
+    }
 
     @Test
     public void test_executeAllList_0010() throws MultipleExecutionException {
@@ -136,7 +142,6 @@ public class ParallelExecutorTest {
                 });
 
         assertEquals(1, result.intValue());
-        ParallelExecutor.shutdown();
     }
 
     @Test

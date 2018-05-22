@@ -28,6 +28,7 @@ import com.numericalmethod.suanshu.parallel.ParallelExecutor;
 import com.numericalmethod.suanshu.stats.random.RngUtils;
 import com.numericalmethod.suanshu.stats.random.univariate.RandomNumberGenerator;
 import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
+import org.junit.After;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -36,6 +37,11 @@ import static org.junit.Assert.assertTrue;
  * @author Johannes Lehmann
  */
 public class ConcurrentCachedRNGTest {
+
+    @After
+    public void tearDown() throws Exception {
+        ParallelExecutor.setConcurrencyLevel(1);
+    }
 
     @Test
     public void benchmarkAgainstSynchronized() throws MultipleExecutionException {
@@ -75,6 +81,5 @@ public class ConcurrentCachedRNGTest {
 
         System.out.printf("Benchmark results: Synchronized took %dms, ConcurrentCachedRNG took %dms%n", synchTotal, cachedTotal);
         assertTrue("ConcurrentCachedRNG is faster", cachedTotal < synchTotal);
-        ParallelExecutor.shutdown();
     }
 }

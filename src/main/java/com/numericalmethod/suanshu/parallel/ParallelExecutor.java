@@ -109,13 +109,6 @@ public class ParallelExecutor {
 
 
     /**
-     * Resets the concurrency level.
-     */
-    public static synchronized void shutdown() {
-        setConcurrencyLevel(1);
-    }
-
-    /**
      * Executes a list of {@link Callable} tasks, and returns a list of results
      * in the same sequential order as {@code tasks}.
      *
